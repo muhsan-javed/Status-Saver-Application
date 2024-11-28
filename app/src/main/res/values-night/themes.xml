@@ -3,5 +3,11 @@
     <style name="Base.Theme.StatusSaver" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!--
+        <item name="fontFamily">@font/helvetice_regular</item>
+        <item name="android:includeFontPadding">false</item>-->
     </style>
 </resources>
