@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.muhsantech.statussaver"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.muhsantech.statussaver"
