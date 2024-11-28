@@ -13,7 +13,13 @@
         android:theme="@style/Theme.StatusSaver"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.ImagesPreview"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.VideosPreview"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
