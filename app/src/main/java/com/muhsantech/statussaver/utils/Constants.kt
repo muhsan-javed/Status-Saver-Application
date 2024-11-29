@@ -1,4 +1,4 @@
-package com.devatrii.statussaver.utils
+package com.muhsantech.statussaver.utils
 
 import android.net.Uri
 import android.os.Build
