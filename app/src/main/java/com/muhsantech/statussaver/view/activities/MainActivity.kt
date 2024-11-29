@@ -1,10 +1,12 @@
 package com.muhsantech.statussaver.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.devatrii.statussaver.utils.Constants
 import com.muhsantech.statussaver.R
 import com.muhsantech.statussaver.databinding.ActivityMainBinding
+import com.muhsantech.statussaver.utils.Constants
+import com.muhsantech.statussaver.utils.SharedPrefUtils
 import com.muhsantech.statussaver.utils.replaceFragment
 import com.muhsantech.statussaver.view.fragments.FragmentSettings
 import com.muhsantech.statussaver.view.fragments.FragmentStatus
@@ -20,6 +22,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContentView(binding.root)
+        SharedPrefUtils.init(activity)
+
+        //Default whatsapp status
+        val fragmentWhatsAppStatus = FragmentStatus()
+        val bundle = Bundle()
+        bundle.putString(Constants.FRAGMENT_TYPE_KEY, Constants.TYPE_WHATSAPP_MAIN)
+        replaceFragment(fragmentWhatsAppStatus, bundle)
 
         binding.apply {
 
@@ -57,4 +66,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragment = supportFragmentManager?.findFragmentById(R.id.fragment_container)
+        fragment?.onActivityResult(requestCode, resultCode, data)
+
+    }
 }
