@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.muhsantech.statussaver.data.StatusRepo
 import com.muhsantech.statussaver.databinding.FragmentStatusBinding
 import com.muhsantech.statussaver.utils.Constants
 import com.muhsantech.statussaver.utils.SharedPrefKeys
 import com.muhsantech.statussaver.utils.SharedPrefUtils
 import com.muhsantech.statussaver.utils.getFolderPermissions
 import com.muhsantech.statussaver.view.adapters.MediaViewPagerAdapter
+import com.muhsantech.statussaver.viewmodels.StatusViewModel
+import com.muhsantech.statussaver.viewmodels.factories.StatusViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,10 +35,20 @@ class FragmentStatus : Fragment() {
 
     private val viewPagerTitles = arrayListOf("images","videos")
 
+    lateinit var viewModel: StatusViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        binding.apply {
             arguments?.let {
+
+                val repo = StatusRepo(requireActivity())
+                viewModel = ViewModelProvider(
+                    requireActivity(),
+                    StatusViewModelFactory(repo)
+                )[StatusViewModel::class.java]
+
+
                 type = it.getString(Constants.FRAGMENT_TYPE_KEY,"")
                 tempText.text = type
                 when(type){
@@ -101,10 +115,12 @@ class FragmentStatus : Fragment() {
     // funcation to get whatsapp statuses
     fun getWhatsappStatuses(){
         binding.permissionLayoutHolder.visibility = View.GONE
+        viewModel.getWhatsAppStatuses()
     }
 
     fun getWhatsappBusinessStatuses(){
         binding.permissionLayoutHolder.visibility = View.GONE
+        viewModel.getWhatsAppBusinessStatuses()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
