@@ -2,7 +2,9 @@ package com.muhsantech.statussaver.view.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.muhsantech.statussaver.R
@@ -17,9 +19,11 @@ class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
         fun bind(mediaModel: MediaModel){
             binding.apply {
                 Glide.with(context)
-                    .load(mediaModel.pathUri)
+                    .load(mediaModel.pathUri.toUri())
                     .into(statusImage)
-
+                if (mediaModel.type == MEDIA_TYPE_IMAGE){
+                    statusPlay.visibility = View.GONE
+                }
                 val downloadImage = if (mediaModel.isDownloaded){
                     R.drawable.ic_downloaded
                 }else {
