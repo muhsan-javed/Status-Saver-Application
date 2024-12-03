@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,6 +12,7 @@ import com.muhsantech.statussaver.R
 import com.muhsantech.statussaver.databinding.ItemMediaBinding
 import com.muhsantech.statussaver.models.MEDIA_TYPE_IMAGE
 import com.muhsantech.statussaver.models.MediaModel
+import com.muhsantech.statussaver.utils.saveStatus
 
 class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
 ) : RecyclerView.Adapter<MediaAdapter.ViewHolder>(){
@@ -40,6 +42,21 @@ class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
                         // gate video preview activity
                     }
                 }
+
+                statusDownload.setOnClickListener {
+                    val isDownloaded = context.saveStatus(mediaModel)
+                    if (isDownloaded){
+                        // status is download
+                        Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                        mediaModel.isDownloaded = true
+                        statusDownload.setImageResource(R.drawable.ic_downloaded)
+                    }else{
+                        // status is download
+                        Toast.makeText(context, "Unable to Save", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
             }
         }
     }
