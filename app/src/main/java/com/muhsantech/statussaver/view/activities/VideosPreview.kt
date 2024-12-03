@@ -29,9 +29,6 @@ class VideosPreview : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-
-
         binding.apply {
             val list = intent.getSerializableExtra(Constants.MEDIA_LIST_KEY) as ArrayList<MediaModel>
             val scrollTo = intent.getIntExtra(Constants.MEDIA_SCROLL_KEY, 0)
@@ -51,10 +48,7 @@ class VideosPreview : AppCompatActivity() {
                     }
                 }
             })
-
-
         }
-
         /*enableEdgeToEdge()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
