@@ -1,6 +1,7 @@
 package com.muhsantech.statussaver.view.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,9 @@ import com.muhsantech.statussaver.R
 import com.muhsantech.statussaver.databinding.ItemMediaBinding
 import com.muhsantech.statussaver.models.MEDIA_TYPE_IMAGE
 import com.muhsantech.statussaver.models.MediaModel
+import com.muhsantech.statussaver.utils.Constants
 import com.muhsantech.statussaver.utils.saveStatus
+import com.muhsantech.statussaver.view.activities.ImagesPreview
 
 class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
 ) : RecyclerView.Adapter<MediaAdapter.ViewHolder>(){
@@ -37,6 +40,12 @@ class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
                 cardStatus.setOnClickListener {
                     if (mediaModel.type == MEDIA_TYPE_IMAGE){
                         // gate image preview activity
+                        Intent().apply {
+                            putExtra(Constants.MEDIA_LIST_KEY,list)
+                            putExtra(Constants.MEDIA_SCROLL_KEY,layoutPosition)
+                            setClass(context, ImagesPreview::class.java)
+                            context.startActivity(this)
+                        }
                     }
                     else{
                         // gate video preview activity
