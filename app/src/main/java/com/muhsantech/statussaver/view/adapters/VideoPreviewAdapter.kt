@@ -31,39 +31,37 @@ class VideoPreviewAdapter(val list:ArrayList<MediaModel>, val context: Context
                     val mediaItem = MediaItem.fromUri(mediaModel.pathUri)
                     player.setMediaItem(mediaItem)
                     player.prepare()
-//                    player.play()
+                    //player.play()
 
 
-                    // Download Implementation
-                    val downloadImage = if (mediaModel.isDownloaded){
+                    val downloadImage = if (mediaModel.isDownloaded) {
                         R.drawable.ic_downloaded
-                    }else {
+                    } else {
                         R.drawable.ic_download
                     }
-
                     tools.statusDownload.setImageResource(downloadImage)
+
 
 
                     tools.download.setOnClickListener {
                         val isDownloaded = context.saveStatus(mediaModel)
-                        if (isDownloaded){
-                            // status is download
-                            Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                        if (isDownloaded) {
+                            // status is downloaded
+                            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
                             mediaModel.isDownloaded = true
                             tools.statusDownload.setImageResource(R.drawable.ic_downloaded)
-                        }else{
-                            // status is download
+                        } else {
+                            // unable to download status
                             Toast.makeText(context, "Unable to Save", Toast.LENGTH_SHORT).show()
-
                         }
                     }
 
                 }
 
         }
-    fun stopPlayer(){
-        binding.playerView.player?.stop()
-    }
+        fun stopPlayer(){
+            binding.playerView.player?.stop()
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
