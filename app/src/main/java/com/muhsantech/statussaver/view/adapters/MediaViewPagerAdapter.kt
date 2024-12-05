@@ -9,27 +9,27 @@ import com.muhsantech.statussaver.view.fragments.FragmentMedia
 
 class MediaViewPagerAdapter(
     private val fragmentActivity: FragmentActivity,
-    private val imageType: String = Constants.MEDIA_TYPE_WHATSAPP_IMAGES,
-    private val videoType: String = Constants.MEDIA_TYPE_WHATSAPP_VIDEOS
+    private val imagesType: String = Constants.MEDIA_TYPE_WHATSAPP_IMAGES,
+    private val videosType: String = Constants.MEDIA_TYPE_WHATSAPP_VIDEOS
 ) : FragmentStateAdapter(fragmentActivity){
 
     override fun getItemCount()= 2
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0 -> {
-                // Images media fragment
+            0->{
+                // images media fragment
                 val mediaFragment = FragmentMedia()
                 val bundle = Bundle()
-                bundle.putString(Constants.MEDIA_TYPE_KEY,imageType)
+                bundle.putString(Constants.MEDIA_TYPE_KEY,imagesType)
                 mediaFragment.arguments = bundle
                 mediaFragment
             }
-            else -> {
-                // Videos media fragment
+            else->{
+                // videos media fragment
                 val mediaFragment = FragmentMedia()
                 val bundle = Bundle()
-                bundle.putString(Constants.MEDIA_TYPE_KEY,videoType)
+                bundle.putString(Constants.MEDIA_TYPE_KEY,videosType)
                 mediaFragment.arguments = bundle
                 mediaFragment
             }
