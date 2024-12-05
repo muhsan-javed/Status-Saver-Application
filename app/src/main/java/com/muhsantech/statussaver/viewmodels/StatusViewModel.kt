@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class StatusViewModel(val repo: StatusRepo) : ViewModel() {
-
     private val wpStatusLiveData get() = repo.whatsAppStatusesLiveData
     private val wpBusinessStatusLiveData get() = repo.whatsAppBusinessStatusesLiveData
     private val TAG = "StatusViewModel"
@@ -31,7 +30,6 @@ class StatusViewModel(val repo: StatusRepo) : ViewModel() {
     val whatsAppBusinessVideosLiveData = MutableLiveData<ArrayList<MediaModel>>()
 
     private var isPermissionsGranted = false
-
 
     init {
         SharedPrefUtils.init(repo.context)
@@ -52,7 +50,7 @@ class StatusViewModel(val repo: StatusRepo) : ViewModel() {
 
             }
             CoroutineScope(Dispatchers.IO).launch {
-               repo.getAllStatuses(Constants.TYPE_WHATSAPP_BUSINESS)
+                repo.getAllStatuses(Constants.TYPE_WHATSAPP_BUSINESS)
             }
         }
     }
@@ -95,6 +93,8 @@ class StatusViewModel(val repo: StatusRepo) : ViewModel() {
             whatsAppVideosLiveData.postValue(tempList)
         }
     }
+
+
     fun getWhatsAppBusinessStatuses() {
         CoroutineScope(Dispatchers.IO).launch {
             if (!isPermissionsGranted) {
@@ -132,5 +132,4 @@ class StatusViewModel(val repo: StatusRepo) : ViewModel() {
             whatsAppBusinessVideosLiveData.postValue(tempList)
         }
     }
-
 }
