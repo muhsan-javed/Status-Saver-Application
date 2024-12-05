@@ -12,7 +12,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:show_buffering="when_playing"
+        app:show_shuffle_button="true" />
 
 
     <LinearLayout
@@ -21,11 +23,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
         <include
             android:id="@+id/tools"
             layout="@layout/layout_tools" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
