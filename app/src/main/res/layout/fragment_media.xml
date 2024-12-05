@@ -19,15 +19,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:spanCount="3"
-        tools:listitem="@layout/item_media">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item_media" />
 
     <TextView
-        android:id="@+id/tempMedaiText"
+        android:id="@+id/tempMediaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="No Media Found"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
