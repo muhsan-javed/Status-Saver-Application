@@ -20,34 +20,38 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class VideosPreview : AppCompatActivity() {
-
+    private val activity = this
     private val binding by lazy {
         ActivityVideosPreviewBinding.inflate(layoutInflater)
     }
     lateinit var adapter: VideoPreviewAdapter
     private val TAG = "VideosPreview"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.apply {
             val list = intent.getSerializableExtra(Constants.MEDIA_LIST_KEY) as ArrayList<MediaModel>
             val scrollTo = intent.getIntExtra(Constants.MEDIA_SCROLL_KEY, 0)
-
-            adapter = VideoPreviewAdapter(list, this@VideosPreview)
-            videoRecyclerview.adapter = adapter
+            adapter = VideoPreviewAdapter(list, activity)
+            videoRecyclerView.adapter = adapter
             val pageSnapHelper = PagerSnapHelper()
-            pageSnapHelper.attachToRecyclerView(videoRecyclerview)
-            videoRecyclerview.scrollToPosition(scrollTo)
+            pageSnapHelper.attachToRecyclerView(videoRecyclerView)
+            videoRecyclerView.scrollToPosition(scrollTo)
 
-            videoRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            videoRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING){
+                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                         Log.d(TAG, "onScrollStateChanged: Dragging")
-                        stopAllPlayer()
+                        stopAllPlayers()
                     }
                 }
+
+
             })
+
+
         }
         /*enableEdgeToEdge()
 
@@ -60,14 +64,14 @@ class VideosPreview : AppCompatActivity() {
 
     }
 
-    private fun stopAllPlayer(){
+    private fun stopAllPlayers() {
         CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 binding.apply {
-                    for (i in 0 until videoRecyclerview.childCount){
-                        val child = videoRecyclerview.getChildAt(i)
-                        val viewHolder = videoRecyclerview.getChildViewHolder(child)
-                        if (viewHolder is VideoPreviewAdapter.ViewHolder){
+                    for (i in 0 until videoRecyclerView.childCount) {
+                        val child = videoRecyclerView.getChildAt(i)
+                        val viewHolder = videoRecyclerView.getChildViewHolder(child)
+                        if (viewHolder is VideoPreviewAdapter.ViewHolder) {
                             viewHolder.stopPlayer()
                         }
                     }
@@ -78,11 +82,11 @@ class VideosPreview : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        stopAllPlayer()
+        stopAllPlayers()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        stopAllPlayer()
+        stopAllPlayers()
     }
 }
