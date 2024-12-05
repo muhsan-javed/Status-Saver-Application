@@ -27,12 +27,12 @@ class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
                 Glide.with(context)
                     .load(mediaModel.pathUri.toUri())
                     .into(statusImage)
-                if (mediaModel.type == MEDIA_TYPE_IMAGE){
+                if (mediaModel.type == MEDIA_TYPE_IMAGE) {
                     statusPlay.visibility = View.GONE
                 }
-                val downloadImage = if (mediaModel.isDownloaded){
+                val downloadImage = if (mediaModel.isDownloaded) {
                     R.drawable.ic_downloaded
-                }else {
+                } else {
                     R.drawable.ic_download
                 }
 
@@ -53,7 +53,7 @@ class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
                         Intent().apply {
                             putExtra(Constants.MEDIA_LIST_KEY,list)
                             putExtra(Constants.MEDIA_SCROLL_KEY,layoutPosition)
-                            setClass(context, VideosPreview::class.java)
+                            setClass(context,VideosPreview::class.java)
                             context.startActivity(this)
                         }
                     }
@@ -61,15 +61,14 @@ class MediaAdapter(val list:ArrayList<MediaModel>, val context: Context
 
                 statusDownload.setOnClickListener {
                     val isDownloaded = context.saveStatus(mediaModel)
-                    if (isDownloaded){
-                        // status is download
-                        Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                    if (isDownloaded) {
+                        // status is downloaded
+                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
                         mediaModel.isDownloaded = true
                         statusDownload.setImageResource(R.drawable.ic_downloaded)
-                    }else{
-                        // status is download
+                    } else {
+                        // unable to download status
                         Toast.makeText(context, "Unable to Save", Toast.LENGTH_SHORT).show()
-
                     }
                 }
 
