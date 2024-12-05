@@ -9,6 +9,7 @@ import com.muhsantech.statussaver.utils.Constants
 import com.muhsantech.statussaver.view.adapters.ImagePreviewAdapter
 
 class ImagesPreview : AppCompatActivity() {
+    private val activity = this
     private val binding by lazy {
         ActivityImagesPreviewBinding.inflate(layoutInflater)
     }
@@ -19,12 +20,12 @@ class ImagesPreview : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
-            val list = intent.getSerializableExtra(Constants.MEDIA_LIST_KEY) as ArrayList<MediaModel>
+            val list =
+                intent.getSerializableExtra(Constants.MEDIA_LIST_KEY) as ArrayList<MediaModel>
             val scrollTo = intent.getIntExtra(Constants.MEDIA_SCROLL_KEY, 0)
-
-            adapter = ImagePreviewAdapter(list, this@ImagesPreview)
-            imageViewPager.adapter = adapter
-            imageViewPager.currentItem = scrollTo
+            adapter = ImagePreviewAdapter(list, activity)
+            imagesViewPager.adapter = adapter
+            imagesViewPager.currentItem = scrollTo
         }
 
         /* enableEdgeToEdge()
