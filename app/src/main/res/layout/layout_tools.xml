@@ -18,22 +18,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="3dp"
             android:src="@drawable/ic_share"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Share"
             android:textColor="@color/white"
             android:textSize="14sp" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -47,22 +45,20 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
-
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="3dp"
             android:src="@drawable/ic_repost"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Repost"
             android:textColor="@color/white"
             android:textSize="14sp" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -76,23 +72,21 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout3"
         app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
-
         <ImageView
             android:id="@+id/statusDownload"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="3dp"
             android:src="@drawable/ic_download"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Save"
             android:textColor="@color/white"
             android:textSize="14sp" />
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
