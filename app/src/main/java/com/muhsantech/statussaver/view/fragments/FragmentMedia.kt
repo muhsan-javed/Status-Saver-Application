@@ -27,16 +27,12 @@ class FragmentMedia : Fragment() {
         super.onCreate(savedInstanceState)
         binding.apply {
             arguments?.let {
-
                 val repo = StatusRepo(requireActivity())
                 viewModel = ViewModelProvider(
                     requireActivity(),
                     StatusViewModelFactory(repo)
                 )[StatusViewModel::class.java]
-
-
-                val mediaType = it.getString(Constants.MEDIA_TYPE_KEY,"")
-
+                val mediaType = it.getString(Constants.MEDIA_TYPE_KEY, "")
                 when (mediaType) {
                     Constants.MEDIA_TYPE_WHATSAPP_IMAGES -> {
                         viewModel.whatsAppImagesLiveData.observe(requireActivity()) { unFilteredList ->
@@ -50,11 +46,11 @@ class FragmentMedia : Fragment() {
                             }
                             adapter = MediaAdapter(list, requireActivity())
                             mediaRecyclerView.adapter = adapter
-                           /* if (list.size == 0) {
+                            if (list.size == 0) {
                                 tempMediaText.visibility = View.VISIBLE
                             } else {
                                 tempMediaText.visibility = View.GONE
-                            }*/
+                            }
 
                         }
                     }
@@ -71,11 +67,11 @@ class FragmentMedia : Fragment() {
                             }
                             adapter = MediaAdapter(list, requireActivity())
                             mediaRecyclerView.adapter = adapter
-                           /* if (list.size == 0) {
+                            if (list.size == 0) {
                                 tempMediaText.visibility = View.VISIBLE
                             } else {
                                 tempMediaText.visibility = View.GONE
-                            }*/
+                            }
                         }
                     }
 
@@ -91,11 +87,11 @@ class FragmentMedia : Fragment() {
                             }
                             adapter = MediaAdapter(list, requireActivity())
                             mediaRecyclerView.adapter = adapter
-                            /*if (list.size == 0) {
+                            if (list.size == 0) {
                                 tempMediaText.visibility = View.VISIBLE
                             } else {
                                 tempMediaText.visibility = View.GONE
-                            }*/
+                            }
                         }
                     }
 
@@ -111,15 +107,14 @@ class FragmentMedia : Fragment() {
                             }
                             adapter = MediaAdapter(list, requireActivity())
                             mediaRecyclerView.adapter = adapter
-                         /*   if (list.size == 0) {
+                            if (list.size == 0) {
                                 tempMediaText.visibility = View.VISIBLE
                             } else {
                                 tempMediaText.visibility = View.GONE
-                            }*/
+                            }
                         }
                     }
                 }
-
 
 
             }
