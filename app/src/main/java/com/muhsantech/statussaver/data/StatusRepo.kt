@@ -18,6 +18,7 @@ import com.muhsantech.statussaver.utils.getFileExtension
 import com.muhsantech.statussaver.utils.isStatusExist
 
 class StatusRepo(val context: Context) {
+
     val whatsAppStatusesLiveData = MutableLiveData<ArrayList<MediaModel>>()
     val whatsAppBusinessStatusesLiveData = MutableLiveData<ArrayList<MediaModel>>()
 
@@ -97,7 +98,6 @@ class StatusRepo(val context: Context) {
 
 
     }
-
 
 
 }
