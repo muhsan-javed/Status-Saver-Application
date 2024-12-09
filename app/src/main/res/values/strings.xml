@@ -2,4 +2,9 @@
     <string name="app_name">Status Saver</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_exit">Exit</string>
+    <string name="subtitle_exit_dialog">Are you sure you want to Exit</string>
+    <string name="title_disclaimer">Disclaimer</string>
+    <string name="desc_disclaimer"><![CDATA[This template for Privacy Policy and Terms & Conditions is furnished on an \"AS IS\" basis, devoid of any express or implied warranties or conditions.\nIt serves as a reference document for you while drafting your own privacy policy.\nThe developer of the App Privacy Policy Generator disclaims any liability for the legal implications arising from the utilization of this privacy policy or terms & conditions.\nIt is strongly recommended to obtain independent legal counsel to ensure compliance with all regulations applicable to the users of your application.\nThe developer of the App Privacy Policy Generator cannot be held accountable for any direct or indirect damage/loss incurred by an individual/company as a result of using this document.\n]]></string>
+    <string name="okay">Okay</string>
 </resources>
