@@ -49,15 +49,15 @@ class SettingsAdapter(var list: ArrayList<SettingsModel>, var context: Context) 
 
                         2 -> {
                             MaterialAlertDialogBuilder(context).apply {
-                                setTitle("Disclaimer")
-                                setMessage("Disclaimer Here")
-                                setPositiveButton("Okay",null)
+                                setTitle(context.resources.getString(R.string.title_disclaimer))
+                                setMessage(context.resources.getString(R.string.desc_disclaimer))
+                                setPositiveButton(context.resources.getString(R.string.okay),null)
                                 show()
                             }
                         }
 
                         3 -> {
-                            Intent(Intent.ACTION_VIEW, Uri.parse("https://muhsantech.com")).apply {
+                            Intent(Intent.ACTION_VIEW, Uri.parse("https://muhsantech.blogspot.com/p/privacy-policy-for-status-saver.html")).apply {
                                 context.startActivity(this)
                             }
 
