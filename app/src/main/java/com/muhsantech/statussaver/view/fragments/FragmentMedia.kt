@@ -127,5 +127,4 @@ class FragmentMedia : Fragment() {
     ) = binding.root
     // Inflate the layout for this fragment
 
-
 }
