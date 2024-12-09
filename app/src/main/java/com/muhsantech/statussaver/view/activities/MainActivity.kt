@@ -1,18 +1,28 @@
 package com.muhsantech.statussaver.view.activities
 
 import android.Manifest
+import android.app.ActionBar
+import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.DialogFragment.STYLE_NO_TITLE
+import androidx.fragment.app.Fragment
 import com.muhsantech.statussaver.R
 import com.muhsantech.statussaver.databinding.ActivityMainBinding
+import com.muhsantech.statussaver.databinding.DialogGuideBinding
+import com.muhsantech.statussaver.databinding.ExitCustomDialogBinding
 import com.muhsantech.statussaver.utils.Constants
 import com.muhsantech.statussaver.utils.SharedPrefKeys
 import com.muhsantech.statussaver.utils.SharedPrefUtils
@@ -24,16 +34,16 @@ import com.muhsantech.statussaver.view.fragments.FragmentStatus
 
 class MainActivity : AppCompatActivity() {
     private val activity = this
-
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContentView(binding.root)
         SharedPrefUtils.init(activity)
+
+//        onBackPressedDispatcher.addCallback(this, onBackBackCallBack)
 
         binding.apply {
             splashLogic()
@@ -45,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             toolBar.setNavigationOnClickListener {
                 drawerLayout.open()
             }
-
 
             navigationView.setNavigationItemSelectedListener {
                 when (it.itemId) {
@@ -82,6 +91,14 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        // In your Activity's onCreate()
+        onBackPressedDispatcher.addCallback(this, onBackBackCallBack)
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                // Show a default fragment or finish the activity
+                replaceFragments(FragmentStatus(), addToBackStack = false)
+            }
+        }
     }
 
 
@@ -138,6 +155,52 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         val fragment = supportFragmentManager?.findFragmentById(R.id.fragment_container)
         fragment?.onActivityResult(requestCode, resultCode, data)
+
+    }
+
+    // Exit App Dialog Function
+    private fun exitDialog() {
+        val dialog = Dialog(this)
+        val dialogBinding = ExitCustomDialogBinding.inflate((activity).layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        dialog.setCancelable(true) // NOT CLOSE
+        dialogBinding.apply {
+            no.setOnClickListener {
+                dialog.dismiss()
+            }
+            yes.setOnClickListener {
+                Toast.makeText(activity, resources.getString(R.string.app_name), Toast.LENGTH_SHORT).show()
+                //showFullAd()
+                finishAffinity()
+            }
+        }
+        dialog.show()
+    }
+
+    fun replaceFragments(fragment: Fragment, addToBackStack: Boolean = true) {
+        val transaction = supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
+    }
+
+    // BackPressed Manage
+    private val onBackBackCallBack = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            if (supportFragmentManager.backStackEntryCount == 1) {
+                // Show exit dialog or finish the act ivity
+                exitDialog()
+            } else if (supportFragmentManager.backStackEntryCount > 1 ) {
+                // Navigate back in the fragment back stack
+                supportFragmentManager.popBackStack()
+            } else {
+                // Back stack is empty, handle accordingly (e.g., show a default fragment)
+                // Example: replaceFragment(HomeFragment(), addToBackStack = false)
+                finishAffinity()
+            }
+        }
 
     }
 }
